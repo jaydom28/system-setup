@@ -1,0 +1,9 @@
+# IDE Related Things
+tags
+tags*
+
+
+# Python related things
+.mypy_cache
+.python-version
+__pycache__

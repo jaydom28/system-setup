@@ -1,0 +1,20 @@
+- name: "Check that git is on system"
+  ansible.builtin.apt:
+    name: "git"
+    state: "present"
+  become: true
+
+- name: "Ensure .config/git directory exists"
+  ansible.builtin.file:
+    path: "~/.config/git"
+    state: directory
+    mode: '0755'
+
+- name: "Ensure link to global gitignore exists"
+  ansible.builtin.file:
+    src: "{{ playbook_dir }}/../configs/git/global_gitignore"
+    dest: "~/.config/git/.global_gitignore"
+    state: link
+
+- name: "Configure git to use global gitignore"
+  ansible.builtin.command: "git config --global core.excludesfile ~/.config/git/.global_gitignore"

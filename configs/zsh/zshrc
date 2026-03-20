@@ -1,0 +1,54 @@
+# If you come from bash you might have to change your $PATH.
+PATH="/usr/local/bin:${PATH}"
+
+# Path to your oh-my-zsh installation.
+export ZSH="${HOME}/.oh-my-zsh"
+source ${ZSH}/oh-my-zsh.sh
+plugins=(colored-man-pages)
+
+PROMPT="%F{yellow}($?)%n:%f %F{blue}%B%1d%b -> %f"
+
+# Environment variables
+export EDITOR="/usr/bin/nvim"
+
+# Aliases
+alias ls="ls --color"
+alias mkdir="mkdir --parents"
+alias reload="unalias -a && source ${HOME}/.zshrc && echo Reloaded aliases!"
+alias rm="trash-put"
+alias ta="tmux attach || tmux"
+alias tree="tree -C"
+alias vg="${EDITOR} ${HOME}/.config/git/.global_gitignore"
+alias vk="${EDITOR} ${HOME}/.config/kitty/kitty.conf"
+alias vr="${EDITOR} ${HOME}/.zshrc"
+alias vt="${EDITOR} ${HOME}/.tmux.conf"
+alias vv="${EDITOR} ${HOME}/.config/nvim/init.lua"
+
+# User experience settings
+bindkey -v # Set VIM controls for ZSH
+setopt inc_append_history
+setopt hist_ignore_dups
+setopt hist_ignore_space
+
+# Additional addons
+
+# Add my local scripts $HOME/bin to path
+PATH="${HOME}/bin:${PATH}"
+
+# Set up fzf key bindings and fuzzy completion
+command -v fzf >/dev/null && source <(fzf --zsh)
+
+## Set up Pyenv paths
+PYENV_ROOT="${HOME}/.pyenv"
+PATH="${PYENV_ROOT}/bin:${PATH}"
+command -v pyenv >/dev/null && eval "$(pyenv init -)"
+
+# Set up GO paths
+GO_ROOT="/usr/local/go"
+PATH="${PATH}:${GO_ROOT}/bin"
+
+# Set up Ruby Gem Paths (Gem is a ruby package manager)
+export GEM_HOME="${HOME}/gems"
+PATH="${GEM_HOME}/bin:${PATH}"
+
+export PATH

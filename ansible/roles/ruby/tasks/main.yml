@@ -1,0 +1,11 @@
+- name: "Ensure ruby related packages are installed"
+  ansible.builtin.apt:
+    name:
+      - "zlib1g-dev"
+      - "build-essential"
+      - "ruby-full"
+    state: "present"
+  become: true
+
+- name: "Install Jekyll"
+  ansible.builtin.command: "gem install jekyll handler"

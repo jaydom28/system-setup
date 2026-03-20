@@ -1,0 +1,9 @@
+- name: "Initial system setup"
+  hosts: all
+  roles:
+    - install_packages
+    - git
+    - neovim
+    - tmux
+    - zsh
+    - ruby

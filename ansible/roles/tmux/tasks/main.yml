@@ -1,0 +1,12 @@
+- name: "Ensure package is installed"
+  ansible.builtin.package:
+    name: "tmux>=3.5a"
+    state: present
+  become: true
+
+- name: "Ensure config file link exists"
+  ansible.builtin.file:
+    src: "{{ playbook_dir }}/../configs/tmux/tmux.conf"
+    dest: "~/.tmux.conf"
+    state: link
+  become: false

@@ -1,0 +1,17 @@
+- name: "Ensure package is installed"
+  ansible.builtin.apt:
+    name: "neovim>=0.10*"
+    state: "present"
+  become: true
+
+- name: "Ensure ctags is installed"
+  ansible.builtin.apt:
+    name: "exuberant-ctags"
+    state: "present"
+  become: true
+
+- name: "Ensure config file link exists"
+  ansible.builtin.file:
+    src: "{{ playbook_dir }}/../configs/nvim"
+    dest: "~/.config/nvim"
+    state: link

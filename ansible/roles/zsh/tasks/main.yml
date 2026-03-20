@@ -1,0 +1,12 @@
+- name: "Ensure ZSH is installed in system"
+  ansible.builtin.package:
+    name: "zsh>=5.9"
+    state: present
+  become: true
+
+- name: "Ensure config file link exists"
+  ansible.builtin.file:
+    src: "{{ playbook_dir }}/../configs/zsh/zshrc"
+    dest: "~/.zshrc"
+    state: link
+  become: false
