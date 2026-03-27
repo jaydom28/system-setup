@@ -1,4 +1,5 @@
-require("config.lazy")
+-- -- Add the local site path to the runtimepath so Neovim can find installed parsers
+vim.opt.rtp:prepend(vim.fn.stdpath("data") .. "/site")
 
 -- Default vim experience settings
 vim.opt.syntax = "on"                       -- syntax highlighting
@@ -23,6 +24,7 @@ vim.opt.tabstop = 4
 vim.opt.visualbell = true
 vim.opt.wildmenu = true
 
+vim.cmd.colorscheme("habamax")
 
 -- Netrw settings (the built-in file browser for vim)
 vim.g.netrw_banner = 0
@@ -33,68 +35,6 @@ vim.g.netrw_liststyle = 3
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
-
--- Colorscheme and statusline
-vim.cmd.colorscheme("habamax")
-require("lualine").setup()
-
-
--- Gutentags configuration
-vim.g.gutentags_add_default_project_roots = 0
-vim.g.gutentags_project_root = {"package.json", ".git"}
-vim.g.gutentags_generate_on_new = 1
-vim.g.gutentags_generate_on_missing = 1
-vim.g.gutentags_generate_on_write = 1
-vim.g.gutentags_generate_on_empty_buffer = 1
-vim.g.gutentags_ctags_extra_args = {"--tag-relative=yes", "--fields=+ailmnS"}
-vim.g.gutentags_ctags_exclude = {
-"*.git", "*.svg", "*.hg",
-"*/tests/*",
-".mypy_cache",
-"build",
-"dist",
-"*sites/*/files/*",
-"bin",
-"node_modules",
-"bower_components",
-"cache",
-"compiled",
-"docs",
-"example",
-"bundle",
-"vendor",
-"*.md",
-"*-lock.json",
-"*.lock",
-"*bundle*.js",
-"*build*.js",
-".*rc*",
-"*.html", "*.json",
-"*.min.*",
-"*.map",
-"*.bak",
-"*.zip",
-"*.pyc",
-"*.class",
-"*.sln",
-"*.Master",
-"*.csproj",
-"*.tmp",
-"*.csproj.user",
-"*.cache",
-"*.pdb",
-"tags*",
-"cscope.*",
-"*.css",
-"*.less",
-"*.scss",
-"*.exe", "*.dll",
-"*.mp3", "*.ogg", "*.flac",
-"*.swp", "*.swo",
-"*.bmp", "*.gif", "*.ico", "*.jpg", "*.png",
-"*.rar", "*.zip", "*.tar", "*.tar.gz", "*.tar.xz", "*.tar.bz2",
-"*.pdf", "*.doc", "*.docx", "*.ppt", "*.pptx",
-}
 
 -- Set some variables for the vimrc
 local PATH_CONFIG = vim.fn.stdpath("config")
@@ -110,21 +50,4 @@ keymap("n", "<leader>v", ":edit $MYVIMRC<CR>", opts)
 keymap("n", "<leader>s", ":luafile $MYVIMRC | echo 'Reloaded vimrc'<CR>", opts)
 keymap("n", "<leader>b", ":TagbarOpen 'jfc'<CR>", opts)
 
-
--- FZF-lua related settings
-require("fzf-lua").setup({"fzf-vim"})       -- Set the fzf-lua profile to use the fzf-vim defaults
--- If currently in a git project, use git files for file search
-local function file_find()
-    if vim.uv.fs_stat(".git") then
-        return FzfLua.git_files
-    end
-    return FzfLua.files
-end
--- FZF related keymaps
-keymap("n", "<leader>p", file_find(), opts)
-keymap("n", "<leader>P", FzfLua.files, opts)
-keymap("n", "<leader>t", FzfLua.btags, opts)
-keymap("n", "<leader>T", FzfLua.tags, opts)
-keymap("n", "<leader>o", FzfLua.grep_curbuf, opts)
-keymap("n", "<leader>O", FzfLua.live_grep_native, opts)
-keymap("n", "<leader>c", FzfLua.colorschemes, opts)
+require("lazy-init")

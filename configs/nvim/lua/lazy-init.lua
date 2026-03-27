@@ -1,3 +1,26 @@
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- latest stable release
+    lazypath,
+  })
+end
+vim.opt.rtp:prepend(lazypath)
+
+require("lazy").setup({
+  spec = {
+    -- This imports everything in lua/plugins/*.lua
+    { import = "plugins" },
+  },
+  checker = { enabled = true }, -- automatically check for plugin updates
+  performance = { rtp = { reset = false } },
+})
+
+--[[
 -- Visit the project page for the latest installation instructions
 -- https://github.com/folke/lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -12,6 +35,10 @@ if not vim.loop.fs_stat(lazypath) then
     })
 end
 vim.opt.rtp:prepend(lazypath)
+
+require('lazy').setup({
+  { import = 'plugins' },
+})
 
 require("lazy").setup({
     -- Boilerplate for next steps.
@@ -44,3 +71,4 @@ require("lazy").setup({
         build = ':TSUpdate',
     }
 })
+]]

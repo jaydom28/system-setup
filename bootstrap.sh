@@ -1,5 +1,6 @@
 #!/bin/bash
 
+
 # If pyenv isn't installed, get the necessary packages and run the installer script
 if ! command -v pyenv >/dev/null; then
     export PYENV_ROOT="${HOME}/.pyenv"

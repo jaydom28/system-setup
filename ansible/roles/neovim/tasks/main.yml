@@ -1,14 +1,16 @@
-- name: "Ensure package is installed"
+- name: "Install neovim and ctags"
   ansible.builtin.apt:
-    name: "neovim>=0.10*"
+    name:
+      - "neovim>=0.10*"
+      - "exuberant-ctags"
     state: "present"
   become: true
 
-- name: "Ensure ctags is installed"
-  ansible.builtin.apt:
-    name: "exuberant-ctags"
-    state: "present"
-  become: true
+- name: "Ensure .config directory exists"
+  ansible.builtin.file:
+    path: "~/.config"
+    state: directory
+    mode: '0755'
 
 - name: "Ensure config file link exists"
   ansible.builtin.file:

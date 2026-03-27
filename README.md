@@ -6,6 +6,8 @@ The **bootstrap.sh** script is designed to be **idempotent** and will install py
 called **user** and then install ansible into that virtualenv. The ansible playbook at `ansible/setup.yml` will then be
 executed to handle the rest.
 
+To install, run this command from the root directory of the project:
+
 ```sh
 $ bash bootstrap.sh
 ```
