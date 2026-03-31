@@ -1,6 +1,3 @@
--- -- Add the local site path to the runtimepath so Neovim can find installed parsers
-vim.opt.rtp:prepend(vim.fn.stdpath("data") .. "/site")
-
 -- Default vim experience settings
 vim.opt.syntax = "on"                       -- syntax highlighting
 vim.opt.autoindent = true                   -- Use the same indent level as the current line when starting a newline
@@ -24,7 +21,10 @@ vim.opt.tabstop = 4
 vim.opt.visualbell = true
 vim.opt.wildmenu = true
 
+
+-- Set the colorscheme
 vim.cmd.colorscheme("habamax")
+
 
 -- Netrw settings (the built-in file browser for vim)
 vim.g.netrw_banner = 0
@@ -40,6 +40,7 @@ vim.g.maplocalleader = " "
 local PATH_CONFIG = vim.fn.stdpath("config")
 local PATH_VIMRC = PATH_CONFIG .. "/init.lua"
 
+
 -- Keybindings
 local opts = { noremap = true, silent = true }
 local keymap = vim.keymap.set
@@ -48,6 +49,6 @@ keymap("n", "<leader>l", ":bn<CR>", opts)
 keymap("n", "<leader>f", ":Lexplore . <bar> vertical res 20<CR>", opts)
 keymap("n", "<leader>v", ":edit $MYVIMRC<CR>", opts)
 keymap("n", "<leader>s", ":luafile $MYVIMRC | echo 'Reloaded vimrc'<CR>", opts)
-keymap("n", "<leader>b", ":TagbarOpen 'jfc'<CR>", opts)
+
 
 require("lazy-init")

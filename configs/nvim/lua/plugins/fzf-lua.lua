@@ -15,6 +15,8 @@ return {
       desc = "Find Files (Git-aware)",
     },
     -- Standard keymaps
+    { "<C-x><C-l>", "<cmd>FzfLua complete_line<cr>", mode="i", silent = true, desc = "FZF line-completion" },
+    { "<leader>a", "<cmd>FzfLua global<cr>", desc = "Global picker" },
     { "<leader>P", "<cmd>FzfLua files<cr>", desc = "Find Files (All)" },
     { "<leader>t", "<cmd>FzfLua btags<cr>", desc = "Buffer Tags" },
     { "<leader>T", "<cmd>FzfLua tags<cr>", desc = "Project Tags" },
